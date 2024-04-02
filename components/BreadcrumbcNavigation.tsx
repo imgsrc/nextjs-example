@@ -80,9 +80,12 @@ export const BreadcrumbcNavigation = ({
         value={value}
         onInputChange={handleChange}
         freeSolo
-        options={data.map((option) => option?.title)}
+        options={data.map((option: Record<string, string>) => option?.title)}
         renderOption={(option) => {
-          const post = data.filter((item) => item?.title === option?.key)[0];
+          const post: Record<string, string> = data.filter(
+            (item: Record<string, string>) =>
+              item?.title === (option as Record<string, string>)?.key,
+          )[0];
           return (
             <Link
               href={post?.href}
@@ -104,10 +107,7 @@ export const BreadcrumbcNavigation = ({
           );
         }}
         renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search article"
-          />
+          <TextField {...params} label="Search article" />
         )}
       />
     </Box>
